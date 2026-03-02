@@ -2,6 +2,9 @@
 
 A replacement for the default Angular Material paginator with a more user-friendly interface.
 
+<img width="1578" height="168" alt="image" src="https://github.com/user-attachments/assets/79a80709-363b-48a6-a2ef-b7158ef32f05" />
+
+
 ## Features
 
 - Left side: Items per page selector and current item range display
@@ -113,3 +116,4 @@ The component uses SCSS for styling and provides several CSS classes that can be
   }
 }
 ```
+
