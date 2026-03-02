@@ -1,0 +1,103 @@
+<div class="custom-paginator" [ngClass]="{'rounded-dsr-radius-medium': borderRadius}">
+  <!-- Left side: Items per page & current range -->
+  <div class="paginator-left">
+    <div class="items-per-page" *ngIf="!hidePageSize">
+      <span class="label">{{ 'CAMPAIGN_OVERVIEW.PAGINATION.ITEMS_PER_PAGE' | translate }}:</span>
+      <mat-form-field appearance="outline" class="page-size-select">
+        <mat-select 
+          [disabled]="disabled" 
+          [value]="pageSize" 
+          (selectionChange)="onPageSizeChange($event.value)"
+          panelClass="page-size-select-panel">
+          <mat-option *ngFor="let size of pageSizeOptions" [value]="size">
+            {{ size }}
+          </mat-option>
+        </mat-select>
+        <app-icons iconName="dropdown-2" size="16"></app-icons>
+      </mat-form-field>
+    </div>
+    <div class="range-info">
+      <span>{{ currentRangeStart }}-{{ currentRangeEnd }} {{ 'COMMON.OF' | translate }} {{ length }} {{ 'COMMON.ITEMS' | translate }}</span>
+    </div>
+  </div>
+  
+  <!-- Right side: Navigation controls -->
+  <div class="paginator-right">
+    <!-- First page button -->
+    <button 
+      *ngIf="showFirstLastButtons"
+      mat-icon-button 
+      class="first-page-button" 
+      [disabled]="disabled || pageIndex === 0" 
+      (click)="firstPage()"
+      [attr.aria-label]="'CAMPAIGN_OVERVIEW.PAGINATION.FIRST_PAGE' | translate">
+      <app-icons iconName="arrow-left-1" size="16" [colorClass]="pageIndex === 0 ? 'icon-disabled' : 'icon-primary'"></app-icons>
+    </button>
+    
+    <!-- Previous page button -->
+    <button 
+      mat-icon-button 
+      class="previous-page-button" 
+      [disabled]="disabled || pageIndex === 0" 
+      (click)="previousPage()"
+      [attr.aria-label]="'CAMPAIGN_OVERVIEW.PAGINATION.PREVIOUS_PAGE' | translate">
+      <app-icons iconName="arrow-left-2" size="16" [colorClass]="pageIndex === 0 ? 'icon-disabled' : 'icon-primary'"></app-icons>
+    </button>
+    
+    <!-- Page numbers -->
+    <div class="page-numbers">
+      <button 
+        *ngFor="let page of pageNumbers" 
+        class="page-number" 
+        [class.active]="page === pageIndex" 
+        [disabled]="disabled" 
+        (click)="setPage(page)">
+        {{ page + 1 }}
+      </button>
+    </div>
+    
+    <!-- Next page button -->
+    <button 
+      mat-icon-button 
+      class="next-page-button" 
+      [disabled]="disabled || pageIndex >= totalPages - 1" 
+      (click)="nextPage()"
+      [attr.aria-label]="'CAMPAIGN_OVERVIEW.PAGINATION.NEXT_PAGE' | translate">
+      <app-icons iconName="arrow-right-2" size="16" [colorClass]="pageIndex >= totalPages - 1 ? 'icon-disabled' : 'icon-primary'"></app-icons>
+    </button>
+    
+    <!-- Last page button -->
+    <button 
+      *ngIf="showFirstLastButtons"
+      mat-icon-button 
+      class="last-page-button" 
+      [disabled]="disabled || pageIndex >= totalPages - 1" 
+      (click)="lastPage()"
+      [attr.aria-label]="'CAMPAIGN_OVERVIEW.PAGINATION.LAST_PAGE' | translate">
+      <app-icons iconName="arrow-right-1" size="16" [colorClass]="pageIndex >= totalPages - 1 ? 'icon-disabled' : 'icon-primary'"></app-icons>
+    </button>
+    
+    <!-- Jump to page -->
+    <div class="jump-to-page">
+      <mat-form-field appearance="outline" class="page-input">
+        <input 
+          matInput 
+          type="number" 
+          [min]="1" 
+          [max]="totalPages" 
+          [(ngModel)]="jumpToPageInput" 
+          [disabled]="disabled" 
+          (keyup.enter)="jumpToPage()"
+          [attr.aria-label]="'COMMON.JUMP_TO_PAGE' | translate">
+      </mat-form-field>
+      <!-- <span class="of-total">of {{ totalPages }}</span> -->
+      <button 
+        mat-button 
+        class="go-button" 
+        [disabled]="disabled" 
+        (click)="jumpToPage()">
+        {{ 'COMMON.GO' | translate }}
+      </button>
+    </div>
+  </div>
+</div>
