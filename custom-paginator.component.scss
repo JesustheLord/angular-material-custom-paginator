@@ -1,0 +1,184 @@
+.custom-paginator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  height: 56px;
+//  margin-top: 10px;
+  background-color: #fff;
+  border-bottom: 1px solid var(--dsr-color-outline-variant);
+  border-left: 1px solid var(--dsr-color-outline-variant);
+  border-right: 1px solid var(--dsr-color-outline-variant);
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.87);
+  
+  .paginator-left {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    
+    .items-per-page {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      
+      .label {
+        color: rgba(0, 0, 0, 0.6);
+        white-space: nowrap;
+      }
+      
+      .page-size-select {
+        width: 80px;
+        margin-bottom: -22px;
+        margin-top: -16px;
+        
+        ::ng-deep .mat-mdc-form-field-infix {
+          padding-top: 5px;
+          padding-bottom: 5px;
+          min-height: 24px;
+        }
+       ::ng-deep app-icons{
+        right: 2px !important;
+       }
+        ::ng-deep .mat-mdc-text-field-wrapper {
+          padding: 0  10px;
+        }
+        
+        ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+          display: none;
+        }
+      }
+    }
+    
+    .range-info {
+      color: rgba(0, 0, 0, 0.6);
+      white-space: nowrap;
+    }
+  }
+  
+  .paginator-right {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    
+    .page-numbers {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      
+      .page-number {
+        min-width: 32px;
+        height: 32px;
+        line-height: 32px;
+        border-radius: 999px;
+        text-align: center;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        outline: none;
+        padding: 0;
+        margin: 0;
+        color: rgba(0, 0, 0, 0.87);
+        
+        &:hover:not(.active):not([disabled]) {
+          background-color: rgba(0, 0, 0, 0.04);
+        }
+        
+        &.active {
+          background-color: var(--dsr-color-primary);
+          color: var(--dsr-color-on-primary);
+          font-weight: 500;
+        }
+        
+        &[disabled] {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+      }
+    }
+    
+    .jump-to-page {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: 16px;
+      
+      .page-input {
+        width: 50px;
+        margin-bottom: -22px;
+        margin-top: -16px;
+        
+        ::ng-deep .mat-mdc-form-field-infix {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            min-height: 24px;
+        }
+        
+        ::ng-deep .mat-mdc-text-field-wrapper {
+          padding: 0 10px;
+        }
+        
+        ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+          display: none;
+        }
+        
+        input {
+          text-align: center;
+        }
+      }
+      
+      .of-total {
+        color: rgba(0, 0, 0, 0.6);
+        white-space: nowrap;
+      }
+      
+      .go-button {
+        min-width: 40px;
+        height: 32px;
+        line-height: 32px;
+        padding: 0 12px;
+        color: var(--primary-color);
+      }
+    }
+  }
+}
+
+// Color classes for the icons
+:host ::ng-deep {
+  .icon-disabled {
+    fill: rgba(0, 0, 0, 0.26);
+  }
+  
+  .icon-primary {
+    fill: rgba(0, 0, 0, 0.54);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .custom-paginator {
+    flex-direction: column;
+    height: auto;
+    padding: 12px;
+    gap: 16px;
+    
+    .paginator-left,
+    .paginator-right {
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .jump-to-page {
+      display: none;
+    }
+    
+    .page-numbers {
+      overflow-x: auto;
+      max-width: 40vw;
+    }
+  }
+}
+
+::ng-deep .mat-mdc-option .mat-pseudo-checkbox-minimal{
+  margin-left: 0 !important;
+}
